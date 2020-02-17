@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  text_retrieve:
+    build: ./text_retrieve
+    volumes:
+      - ./text_retrieve:/usr/src/app
+    ports:
+      - 5001:80
+
+  img_retrieve:
+    build: ./img_retrieve
+    volumes:
+      - ./img_retrieve:/usr/src/app
+    ports:
+      - 5002:80
+
