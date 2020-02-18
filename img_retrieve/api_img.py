@@ -6,15 +6,15 @@ from flask_restful import Resource, Api
 app = Flask(__name__)
 api = Api(app)
 
-class Text(Resource):
+class Img(Resource):
     def get(self):
         # to return text data.. in JSON??
         return {
-            'text': ['some img1', 'img1',]
+            'img': ['some img1', 'img1',]
         }
 
 # routine
-api.add_resource(Text, '/')
+api.add_resource(Img, '/')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
