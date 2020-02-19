@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Semantive recruitment</title>
+</head>
+<body>
+    <h2>Application for retrieving text and img resources.</h2>
+    <hr>
+    <h3>What do you want to do?</h3>
+    <div>
+        <a href="{{ url_for('retrieve_data') }}">
+            <button type="button">Retrieve data from given website</button>
+        </a>
+    </div>
+    <br>
+    <div>
+        <a href="{{ url_for('get_data') }}">
+            <button type="button">Get retrieved and stored data</button>
+        </a>
+    </div>
+</body>
+</html>

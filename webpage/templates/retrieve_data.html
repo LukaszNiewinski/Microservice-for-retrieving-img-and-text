@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Retrieve data</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+        function validateCheckbox() {
+            var n = $("input:checked").length;
+            if(n == 0) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+</head>
+
+
+<body>
+    <h2>Retrieve data from given website</h2>
+    <hr>
+    <h3>Provide url and chose if to retrieve text, img or both.</h3>
+    <div>
+        <form action="{{ url_for('retrieve_data') }}" id="retrieveForm" method="post">
+        <p>
+            <label for="url_path">Url path to retrieve data from:</label>
+            <input type="url" id="url_path" name="url_path"><br>
+        </p>
+        <p><input type="checkbox" id="text" name="retrieve" value="text">Retrieve text</p>
+        <p><input type="checkbox" id="img" name="retrieve" value="img">Retreive images</p>
+
+        <br>
+        <input type="submit" value="Order retrieving">
+
+    </form>
+    </div>
+
+    <br>
+    <hr>
+    <div>
+        <a href="{{ url_for('home') }}">
+            <button type="button">Back to home page</button>
+        </a>
+    </div>
+
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
+</body>
+</html>
