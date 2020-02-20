@@ -21,3 +21,16 @@ services:
       - ./webpage:/usr/src/app
     ports:
       - 5000:80
+
+  db:
+    image: postgres:12.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=hello_semnative
+      - POSTGRES_PASSWORD=hire_me
+      - POSTGRES_DB=retrieve_data_dev
+
+# volume extends postgres data beyond container life
+volumes:
+  postgres_data:
