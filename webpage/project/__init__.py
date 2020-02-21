@@ -1,6 +1,7 @@
 from flask import Flask, render_template, url_for, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+import requests
 
 app = Flask(__name__)
 app.config.from_object("project.config.Config")

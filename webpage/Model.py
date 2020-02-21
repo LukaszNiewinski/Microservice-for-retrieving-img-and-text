@@ -53,12 +53,10 @@ class WebpageRetrievedSchema(ma.Schema):
 
 
     identifier = fields.Integer()
-    url_path = fields.Url()
+    url_path = fields.Url(required=True)
     created_at = fields.DateTime(default=datetime.datetime.utcnow())
-    retrieved_text = fields.Boolean()
-    retrieved_img = fields.Boolean()
-
-
+    retrieved_text = fields.Boolean(required=True)
+    retrieved_img = fields.Boolean(required=True)
 
 
 class TextRetrievedSchema(ma.Schema):

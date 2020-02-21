@@ -3,6 +3,7 @@
 from flask import Flask
 from flask_restful import Resource, Api
 
+
 app = Flask(__name__)
 api = Api(app)
 
@@ -10,9 +11,8 @@ class Img(Resource):
     def get(self):
         # to return text data.. in JSON??
         return {
-            'img': ['some img1', 'img1',]
+            'text': ['some ccct', 'volume test2',]
         }
-
 # routine
 api.add_resource(Img, '/')
 

@@ -1,13 +1,16 @@
 from flask_restful import Resource
 from flask import request
-import Model
 import json
+import requests
+import Model
 
 webpages_schema = Model.WebpageRetrievedSchema(many=True)
 webpage_schema = Model.WebpageRetrievedSchema(dump_only=['identifier', 'created_at'])
 
+
 class Webpage(Resource):
     def get(self):
+        # GET method for accessing the data about stored already retrieved websites
         if Model.WebpageRetrieved.query.all():
             webpages = Model.WebpageRetrieved.query.all()
             webpages = webpages_schema.dump(webpages)
@@ -17,7 +20,7 @@ class Webpage(Resource):
             return {'status': 'failure', 'data': 'None'}, 404
 
     def post(self):
-        #get data from web form request
+        # POST method for retrieving text/img from new website (or repeat at other time)
         try:
             # get data from api request
             json_data = request.get_json(force=True)
@@ -44,10 +47,28 @@ class Webpage(Resource):
 
         webpage = Model.WebpageRetrieved(data["url_path"], data["retrieved_text"], data["retrieved_img"])
 
+
         Model.db.session.add(webpage)
         Model.db.session.commit()
+
+        #send requests to the containers
+        if data['retrieved_text']:
+            try:
+                r = requests.get('http://text_retrieve?url_path='+data['url_path'])
+                retrieved_text = r.json()
+
+            except:
+                return {'status': 'failure', 'information': 'text_retrieve failure'}, 404
+
 
         obj = Model.db.session.query(Model.WebpageRetrieved).order_by(Model.WebpageRetrieved.identifier.desc()).first()
         result = webpage_schema.dump(obj)
 
-        return {'status': 'successfully created, data will be retrieved', 'data': result}, 201
+        # add retrieved text to the table
+        data_text = Model.TextRetrieved(identifier=result['identifier'], text=retrieved_text['retrieved_text'])
+        Model.db.session.add(data_text)
+        Model.db.session.commit()
+
+
+        return {'status': 'successfully created, data retrieved', 'webpage': result, 'retrieved_text': retrieved_text}, 201
+g
