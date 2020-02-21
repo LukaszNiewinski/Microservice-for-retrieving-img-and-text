@@ -10,7 +10,7 @@
     <hr>
     <h3>Provide url and chose if to retrieve text, img or both.</h3>
     <div>
-        <form action="{{ url_for('retrieve_data') }}" id="retrieveForm" method="post">
+        <form action="{{ url_for('api.webpage') }}" id="retrieveForm" method="post">
         <p>
             <label for="url_path">Url path to retrieve data from:</label>
             <input type="url" id="url_path" name="url_path"><br>

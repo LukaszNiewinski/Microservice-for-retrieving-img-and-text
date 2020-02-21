@@ -17,12 +17,30 @@ class Webpage(Resource):
             return {'status': 'failure', 'data': 'None'}, 404
 
     def post(self):
-        json_data = request.get_json(force=True)
-        if not json_data:
-               return {'message': 'No input data provided'}, 400
-        parsed_json = json.loads(json.dumps(json_data[0]))
-        # Validate and deserialize input
-        data = webpage_schema.load(parsed_json)
+        #get data from web form request
+        try:
+            # get data from api request
+            json_data = request.get_json(force=True)
+            if not json_data:
+                return {'message': 'No input data provided'}, 400
+
+            parsed_json = json.loads(json.dumps(json_data[0]))
+            # Validate and deserialize input
+            data = webpage_schema.load(parsed_json)
+        except:
+            # get data posted through website form
+            response_dict = request.form.to_dict(flat=False)
+            to_retrieve = response_dict['retrieve']
+
+            data = {}
+            data['url_path'] = response_dict['url_path']
+            data['retrieved_text'] = False
+            data['retrieved_img'] = False
+
+            if 'text' in to_retrieve:
+                data['retrieved_text'] = True
+            if 'img' in to_retrieve:
+                data['retrieved_img'] = True
 
         webpage = Model.WebpageRetrieved(data["url_path"], data["retrieved_text"], data["retrieved_img"])
 
