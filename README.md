@@ -23,20 +23,25 @@ To run:
 - `200 OK` on success
 
 ```json
-[
-  {
-    "identifier": "0",
-    "url_path": "www.google.com",
-    "retrieved_text": "Yes",
-    "retrieved_img": "Yes"
-  },
-    {
-    "identifier": "1",
-    "url_path": "www.wp.pl",
-    "retrieved_text": "Yes", 
-    "retrieved_img": "No"
-  }
-]
+{
+    "status": "success, list of all the webpages",
+    "data": [
+        {
+            "retrieved_text": true,
+            "created_at": "2020-02-20T05:20:58.793149",
+            "retrieved_img": true,
+            "url_path": "www.google.com",
+            "identifier": 1
+        },
+        {
+            "retrieved_text": true,
+            "created_at": "2020-02-20T05:21:46.474182",
+            "retrieved_img": true,
+            "url_path": "www.google.com",
+            "identifier": 2
+        }
+    ]
+}
 ```
 
 ### Add new website
@@ -57,12 +62,16 @@ To run:
 
 ```json
 [
-  {
-    "identifier": "0",
-    "url_path": "www.google.com",
-    "retrieved_text": "Yes",
-    "retrieved_img": "Yes"
-  }
+{
+    "status": "successfully created, data will be retrieved",
+    "data": {
+        "identifier": 1,
+        "retrieved_text": true,
+        "retrieved_img": true,
+        "created_at": "2020-02-20T07:22:52.550194",
+        "url_path": "http://google.com"
+    }
+}
 ]
 ```
 
@@ -76,12 +85,10 @@ To run:
 ```json
 [
   {
-    "identifier": "0",
+    "identifier": 1,
     "url_path": "www.google.com",
-    "retrieved_text": "Yes",
-    "retrieved_img": "Yes",
-    "text_num": "number",
-    "img_num": "number" 
+    "retrieved_text": "True",
+    "retrieved_img": "True"
   }
 ]
 ```
@@ -92,7 +99,7 @@ To run:
 
 ## Get retrieved website text
 
-`GET /api/webpages/<identifier>/text`
+`GET /api/webpages_text/<identifier>`
 
 - `404 Not Found` if the text does not exists
 - `200 OK` on success
@@ -100,7 +107,7 @@ To run:
 ```json
 [
   {
-    "identifier": "0",
+    "identifier": 1,
     "url_path": "www.google.com",
     "text": "array of words"
   }
@@ -110,7 +117,7 @@ To run:
 
 ## Get retrieved website img
 
-`GET /api/webpages/<identifier>/img`
+`GET /api/webpages_img/<identifier>`
 
 - `404 Not Found` if the text does not exists
 - `200 OK` on success

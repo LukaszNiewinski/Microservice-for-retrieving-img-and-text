@@ -1,0 +1,16 @@
+
+1. Command to build the new image and spin up the containers
+docker-compose up -d --build
+
+2. create the tables
+docker-compose exec webpage python manage.py create_db
+
+3. in case of an error with database does not exists
+docker-compose down -v
+(to remove the volumes along the containers)
+
+4. ensure that tables were created
+docker-compose exec db psql --username=hello_semantive --dbname=retrieve_data_dev
+\c
+\dt
+

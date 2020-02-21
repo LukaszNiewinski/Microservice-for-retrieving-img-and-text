@@ -5,29 +5,36 @@ services:
     build: ./text_retrieve
     volumes:
       - ./text_retrieve:/usr/src/app
-    ports:
-      - 5001:80
+#    ports:
+#      - 5001:80
 
   img_retrieve:
     build: ./img_retrieve
     volumes:
       - ./img_retrieve:/usr/src/app
-    ports:
-      - 5002:80
+#    ports:
+#      - 5002:80
 
   webpage:
     build: ./webpage
+#    command: python manage.py run -h 0.0.0.0
     volumes:
       - ./webpage:/usr/src/app
     ports:
       - 5000:80
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+      - text_retrieve
+      - img_retrieve
 
   db:
     image: postgres:12.0-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=hello_semnative
+      - POSTGRES_USER=hello_semantive
       - POSTGRES_PASSWORD=hire_me
       - POSTGRES_DB=retrieve_data_dev
 
