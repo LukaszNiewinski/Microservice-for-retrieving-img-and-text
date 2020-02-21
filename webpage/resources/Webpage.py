@@ -51,6 +51,10 @@ class Webpage(Resource):
         Model.db.session.add(webpage)
         Model.db.session.commit()
 
+        # add webpage data to the table
+        obj = Model.db.session.query(Model.WebpageRetrieved).order_by(Model.WebpageRetrieved.identifier.desc()).first()
+        result = webpage_schema.dump(obj)
+
         #send requests to the containers
         retrieved_text = None
         if data['retrieved_text']:
@@ -63,13 +67,11 @@ class Webpage(Resource):
                 return {'status': 'failure', 'information': 'text_retrieve failure'}, 404
 
 
-        obj = Model.db.session.query(Model.WebpageRetrieved).order_by(Model.WebpageRetrieved.identifier.desc()).first()
-        result = webpage_schema.dump(obj)
-
-        # add retrieved text to the table
-        data_text = Model.TextRetrieved(identifier=result['identifier'], text=retrieved_text['retrieved_text'])
-        Model.db.session.add(data_text)
-        Model.db.session.commit()
+        if retrieved_text:
+            # add retrieved text to the table
+            data_text = Model.TextRetrieved(identifier=result['identifier'], text=retrieved_text['retrieved_text'])
+            Model.db.session.add(data_text)
+            Model.db.session.commit()
 
 
-        return {'status': 'successfully created, data retrieved', 'webpage': result, 'retrieved_text': retrieved_text}, 201
+        return {'status': 'success', 'webpage': result, 'retrieved_text': retrieved_text}, 201
