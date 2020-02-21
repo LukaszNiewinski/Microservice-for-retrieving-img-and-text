@@ -2,6 +2,15 @@
 
 ## Usage 
 
+To run: 
+```docker-compose up -d --build```
+
+Home page address: `http://localhost:5000/`
+
+
+
+
+
 Most of the responses have format:
 
 ```json
@@ -21,9 +30,7 @@ Application is built on the services:
 - webpage_service 
 - db(postgresql)
 
-To run: 
-```docker-compose build```
-```docker-compose up```
+
 
 ### List all websites retrieved 
 
@@ -119,4 +126,4 @@ To run:
 - `200 OK` on success
 
 [TO DO]
-allows to download images?..
+In process.. 
