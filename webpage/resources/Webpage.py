@@ -7,7 +7,7 @@ import Model
 webpages_schema = Model.WebpageRetrievedSchema(many=True)
 webpage_schema = Model.WebpageRetrievedSchema(dump_only=['identifier', 'created_at'])
 
-
+# Main resource - webpages, created triggers data retrieval
 class Webpage(Resource):
     def get(self):
         # GET method for accessing the data about stored already retrieved websites

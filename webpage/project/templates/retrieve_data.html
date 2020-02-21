@@ -11,17 +11,17 @@
     <h3>Provide url and chose if to retrieve text, img or both.</h3>
     <div>
         <form action="{{ url_for('api.webpage') }}" id="retrieveForm" method="post">
-        <p>
-            <label for="url_path">Url path to retrieve data from:</label>
-            <input type="url" id="url_path" name="url_path"><br>
-        </p>
-        <p><input type="checkbox" name="retrieve" value="text"/>Retrieve text</p>
-        <p><input type="checkbox" name="retrieve" value="img"/>Retrieve images</p>
+            <p>
+                <label for="url_path">Url path to retrieve data from:</label>
+                <input type="url" id="url_path" name="url_path"><br>
+            </p>
+            <p><input type="checkbox" name="retrieve" value="text"/>Retrieve text</p>
+            <p><input type="checkbox" name="retrieve" value="img"/>Retrieve images</p>
 
-        <br>
-        <input type="submit" value="Order retrieving">
+            <br>
+            <input type="submit" value="Order retrieving">
 
-    </form>
+        </form>
     </div>
 
     <br>

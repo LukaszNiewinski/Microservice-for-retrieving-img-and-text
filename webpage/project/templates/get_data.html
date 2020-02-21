@@ -7,9 +7,44 @@
 <body>
     <h2>Get already retrieved and stored data.</h2>
     <hr>
-    <h3>Choose resources to get</h3>
-    <p>[TO DO]</p>
+    <h3>List of all retrieved webpages</h3>
+    <table border = 1>
+         {% for item in result %}
+            <tr>
+                <td>Identifier: {{ item['identifier'] }} </td>
+                <th> {{ item['url_path'] }} </th>
+                <td> {{ item['created_at'] }} </td>
+                <td> Text: {{ item['retrieved_text'] }} </td>
+                <td> Img: {{ item['retrieved_img'] }} </td>
+            </tr>
+         {% endfor %}
+      </table>
 
+    <hr>
+    <h3>Get data by providing identifier number</h3>
+    <div>
+        <form action="{{ url_for('api.text') }}" id="get_text" method="get">
+            <p>
+                <label for="identifier">Retrieve text</label>
+                <br>
+                <input type="number" id="identifier" name="identifier" placeholder="identifier number"><br>
+            </p>
+            <input type="submit" value="Get text">
+
+        </form>
+    </div>
+    <br>
+    <div>
+        <form action="{{ url_for('api.img') }}" id="get_img" method="get">
+            <p>
+                <label for="identifier">Retrieve images</label>
+                <br>
+                <input type="number" id="identifier" name="identifier" placeholder="identifier number"><br>
+            </p>
+            <input type="submit" value="Get images">
+
+        </form>
+    </div>
     <br>
     <hr>
     <div>
@@ -17,6 +52,7 @@
             <button type="button">Back to home page</button>
         </a>
     </div>
+
 
 </body>
 </html>

@@ -1,6 +1,6 @@
 from flask_restful import Resource
 
-class Webpage_img(Resource):
+class Img(Resource):
     def get(self, identifier):
         return [
                   {

@@ -2,6 +2,19 @@
 
 ## Usage 
 
+Most of the responses have format:
+
+```json
+{
+    "status": "success",
+    "data": [
+        {
+            "keys": "values"
+        }
+    ]
+}
+```
+
 Application is built on the services:
 - img_retrieve_service
 - text_retrieve_service
@@ -24,7 +37,7 @@ To run:
 
 ```json
 {
-    "status": "success, list of all the webpages",
+    "status": "success",
     "data": [
         {
             "retrieved_text": true,
@@ -63,7 +76,7 @@ To run:
 ```json
 [
 {
-    "status": "successfully created, data will be retrieved",
+    "status": "successfully created",
     "data": {
         "identifier": 1,
         "retrieved_text": true,
@@ -75,49 +88,32 @@ To run:
 ]
 ```
 
-## Get retrieved website details
+## Get retrieved text
 
-`GET /api/webpages/<identifier>`
+`GET /api/text?Identifier=<identifier>`
 
-- `404 Not Found` if the website does not exists
+- `identifier` is a unique id given while doing extraction(auto-incremented integer)
+- `404 Not Found` if the website does not exists or failure
 - `200 OK` on success
 
 ```json
+
 [
-  {
-    "identifier": 1,
-    "url_path": "www.google.com",
-    "retrieved_text": "True",
-    "retrieved_img": "True"
-  }
-]
-```
-
-`"text_num": "number"` <-- number of words extracted
-
-`"img_num": "number"` <-- number of img extracted
-
-## Get retrieved website text
-
-`GET /api/webpages_text/<identifier>`
-
-- `404 Not Found` if the text does not exists
-- `200 OK` on success
-
-```json
-[
-  {
-    "identifier": 1,
-    "url_path": "www.google.com",
-    "text": "array of words"
-  }
+{
+    "status": "success",
+    "data":   {
+        "identifier": 1,
+        "text": "long text..",
+        "id": 1
+    }
+}
 ]
 ```
 
 
 ## Get retrieved website img
 
-`GET /api/webpages_img/<identifier>`
+`GET /api/img?Identifier=<identifier>`
 
 - `404 Not Found` if the text does not exists
 - `200 OK` on success
