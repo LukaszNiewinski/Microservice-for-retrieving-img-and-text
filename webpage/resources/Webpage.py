@@ -36,7 +36,7 @@ class Webpage(Resource):
             to_retrieve = response_dict['retrieve']
 
             data = {}
-            data['url_path'] = response_dict['url_path']
+            data['url_path'] = response_dict['url_path'][0]
             data['retrieved_text'] = False
             data['retrieved_img'] = False
 
@@ -52,8 +52,10 @@ class Webpage(Resource):
         Model.db.session.commit()
 
         #send requests to the containers
+        retrieved_text = None
         if data['retrieved_text']:
             try:
+                print(data['url_path'])
                 r = requests.get('http://text_retrieve?url_path='+data['url_path'])
                 retrieved_text = r.json()
 
@@ -71,4 +73,3 @@ class Webpage(Resource):
 
 
         return {'status': 'successfully created, data retrieved', 'webpage': result, 'retrieved_text': retrieved_text}, 201
-g
