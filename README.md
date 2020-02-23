@@ -127,3 +127,21 @@ Application is built on the services:
 
 [TO DO]
 In process.. 
+
+
+Requests examples to test api:
+
+POST `http://localhost:5000/api/webpages`
+```json
+[
+{"url_path": "https://pl.wikipedia.org/wiki/Lizbona",
+"retrieved_text": "true",
+"retrieved_img": "true"}
+]
+```
+
+
+GET `http://localhost:5000/api/webpages`
+
+GET `http://localhost:5000/api/text?Identifier=1 `
+
