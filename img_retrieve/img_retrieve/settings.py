@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for scrapy_img project
+# Scrapy settings for img_retrieve project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,32 +9,29 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'scrapy_img'
+BOT_NAME = 'img_retrieve'
 
-SPIDER_MODULES = ['scrapy_img.spiders']
-NEWSPIDER_MODULE = 'scrapy_img.spiders'
+SPIDER_MODULES = ['img_retrieve.spiders']
+NEWSPIDER_MODULE = 'img_retrieve.spiders'
 
-# added img_retrieve parameters
-ITEM_PIPELINES = {'scrapy.contrib.pipeline.images.ImagesPipeline': 1}
+
+ITEM_PIPELINES = {'scrapy.pipelines.images.ImagesPipeline': 1}
 
 # number of days until we re-download the img
 IMAGES_EXPIRES = 180
 
 # temporary private access key - necessity of making authorization by API
-AWS_ACCESS_KEY_ID = "AKIAJX2R32KJMH66YCGA"
-AWS_SECRET_ACCESS_KEY = "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"
-
-# bucker arn: arn:aws:s3:::imagesfilesformicroservice
-IMAGES_STORE = 's3://imagesfilesformicroservice/'
+AWS_ACCESS_KEY_ID = 'AKIAJX2R32KJMH66YCGA'
+AWS_SECRET_ACCESS_KEY = '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'
+IMAGES_STORE_S3_ACL = 'public-read'
+IMAGES_STORE = 's3://microservice-images/'
 
 IMAGES_THUMBS = {
     'small': (50, 50),
     'big': (300, 300)
 }
-
-
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'scrapy_img (+http://www.yourdomain.com)'
+#USER_AGENT = 'img_retrieve (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -65,13 +62,13 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'scrapy_img.middlewares.ScrapyImgSpiderMiddleware': 543,
+#    'img_retrieve.middlewares.ImgRetrieveSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'scrapy_img.middlewares.ScrapyImgDownloaderMiddleware': 543,
+#    'img_retrieve.middlewares.ImgRetrieveDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -83,7 +80,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    'scrapy_img.pipelines.ScrapyImgPipeline': 300,
+#    'img_retrieve.pipelines.ImgRetrievePipeline': 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)

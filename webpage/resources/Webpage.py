@@ -59,19 +59,29 @@ class Webpage(Resource):
         retrieved_text = None
         if data['retrieved_text']:
             try:
-                print(data['url_path'])
                 r = requests.get('http://text_retrieve?url_path='+data['url_path'])
                 retrieved_text = r.json()
-
             except:
                 return {'status': 'failure', 'information': 'text_retrieve failure'}, 404
 
+        #send requests to the containers
+        retrieved_img = None
+        if data['retrieved_img']:
+            r = requests.get('http://img_retrieve?url_path=' + data['url_path'] + '&identifier=' + str(result['identifier']))
+            retrieved_img = r.json()
 
         if retrieved_text:
             # add retrieved text to the table
             data_text = Model.TextRetrieved(identifier=result['identifier'], text=retrieved_text['retrieved_text'])
             Model.db.session.add(data_text)
-            Model.db.session.commit()
 
 
-        return {'status': 'success', 'webpage': result, 'retrieved_text': retrieved_text}, 201
+        if retrieved_img:
+            # add retrieved images to the table
+            for path in retrieved_img['img_paths']:
+                data_img = Model.ImgRetrieved(identifier=result['identifier'], img_path=path)
+                Model.db.session.add(data_img)
+
+        Model.db.session.commit()
+
+        return {'status': 'success', 'webpage': result, 'retrieved_text': retrieved_text, 'retrieved_img': retrieved_img}, 201

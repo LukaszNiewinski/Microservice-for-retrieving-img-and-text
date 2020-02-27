@@ -8,7 +8,6 @@
 import scrapy
 
 
-class ScrapyImgItem(scrapy.Item):
-    # defined structure of an item, those fields requires those names
-    image_urls = scrapy.Field() # needs to be a lists and contains full paths
+class ImgRetrieveItem(scrapy.Item):
     images = scrapy.Field()
+    image_urls = scrapy.Field()
