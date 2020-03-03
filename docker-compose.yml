@@ -34,8 +34,8 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=hello_semantive
-      - POSTGRES_PASSWORD=hire_me
+      - POSTGRES_USER=microservice
+      - POSTGRES_PASSWORD=password
       - POSTGRES_DB=retrieve_data_dev
 
 # volume extends postgres data beyond container life
