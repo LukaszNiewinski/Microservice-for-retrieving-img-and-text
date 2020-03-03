@@ -26,7 +26,8 @@ def run_retrieve(url, result):
     process.start()  # the script will block here until the crawling is finished
     process.join()
 
-
+def str_join(*args):
+    return ''.join(map(str, args))
 
 class Img(Resource):
     def get(self):
@@ -45,10 +46,10 @@ class Img(Resource):
         new_process.join()
 
         if result:
-            print("KUUUUUUUPA")
-            print(result[0]['images'])
             for img in result[0]['images']:
-                paths.append('https://microservice-images.s3.eu-central-1.amazonaws.com/' + img['path'])
+                path = str_join('https://microservice-images.s3.eu-central-1.amazonaws.com/', img['path'])
+                paths.append(path)
+                # paths.append('https://microservice-images.s3.eu-central-1.amazonaws.com/' + img['path'])
         else:
             paths = [None]
 

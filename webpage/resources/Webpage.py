@@ -7,6 +7,9 @@ import Model
 webpages_schema = Model.WebpageRetrievedSchema(many=True)
 webpage_schema = Model.WebpageRetrievedSchema(dump_only=['identifier', 'created_at'])
 
+def str_join(*args):
+    return ''.join(map(str, args))
+
 # Main resource - webpages, created triggers data retrieval
 class Webpage(Resource):
     def get(self):
@@ -59,7 +62,8 @@ class Webpage(Resource):
         retrieved_text = None
         if data['retrieved_text']:
             try:
-                r = requests.get('http://text_retrieve?url_path='+data['url_path'])
+                url = str_join('http://text_retrieve?url_path=', data['url_path'])
+                r = requests.get(url)
                 retrieved_text = r.json()
             except:
                 return {'status': 'failure', 'information': 'text_retrieve failure'}, 404
@@ -67,7 +71,8 @@ class Webpage(Resource):
         #send requests to the containers
         retrieved_img = None
         if data['retrieved_img']:
-            r = requests.get('http://img_retrieve?url_path=' + data['url_path'] + '&identifier=' + str(result['identifier']))
+            url = str_join('http://img_retrieve?url_path=', data['url_path'], '&identifier=', str(result['identifier']))
+            r = requests.get(url)
             retrieved_img = r.json()
 
         if retrieved_text:

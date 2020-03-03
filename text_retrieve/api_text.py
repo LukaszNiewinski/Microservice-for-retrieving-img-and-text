@@ -5,7 +5,6 @@ from flask_restful import Resource, Api
 from urllib.request import Request, urlopen
 import html2text
 
-
 app = Flask(__name__)
 api = Api(app)
 
@@ -14,7 +13,6 @@ class Text(Resource):
         # get url_path from args
         args = request.args
 
-        # req = Request("https://pl.wikipedia.org/wiki/Lizbona")
         req = Request(args['url_path'])
 
         resource = urlopen(req)
@@ -41,7 +39,6 @@ class Text(Resource):
 
 # routine
 api.add_resource(Text, '/')
-# api.add_resource(Text, '/')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
