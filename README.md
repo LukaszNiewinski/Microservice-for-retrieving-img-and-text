@@ -1,4 +1,10 @@
-# Small project for recruitment process for Semantive company.
+# Service for collecting images and text data.
+
+Application allows to retrieve images and text data from given website. 
+Text is being stored in a database(local postgres db might be changed to remote server).
+Retrieved images are being stored in AWS bucket with it's paths being stored in a db. 
+Application can be started easily with one command. AWS access credentials needs to be changed.
+Future work includes adding handling asynchronous requests(adding job queue) and adding tests.
 
 ## Usage 
 
