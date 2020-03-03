@@ -21,8 +21,8 @@ ITEM_PIPELINES = {'scrapy.pipelines.images.ImagesPipeline': 1}
 IMAGES_EXPIRES = 180
 
 # temporary private access key - necessity of making authorization by API
-AWS_ACCESS_KEY_ID = 'AKIAJX2R32KJMH66YCGA'
-AWS_SECRET_ACCESS_KEY = 'aLpLTN6rc9kX2ftHi4l7GViWvYibilD7MOfkKtV/'
+AWS_ACCESS_KEY_ID = '<your_acces_key>'
+AWS_SECRET_ACCESS_KEY = '<your_secret_acces_key>'
 IMAGES_STORE_S3_ACL = 'public-read'
 IMAGES_STORE = 's3://microservice-images/'
 
